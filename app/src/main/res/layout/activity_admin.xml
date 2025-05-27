@@ -1,0 +1,55 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/adminTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Panel"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/viewPanditList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Pandit List"/>
+
+    <Button
+        android:id="@+id/viewUserList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View User List"/>
+
+    <Button
+        android:id="@+id/managePandits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Pandits"/>
+    <Button
+        android:id="@+id/AddPuja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Puja"/>
+
+    <Button
+        android:id="@+id/admin_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"/>
+
+    <!-- ✅ Ye FrameLayout Fragment show karega -->
+    <FrameLayout
+        android:id="@+id/admin_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp">
+    </FrameLayout>
+
+</LinearLayout>

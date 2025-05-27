@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592465044457",
+    "project_id": "pujamandal-182d9",
+    "storage_bucket": "pujamandal-182d9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592465044457:android:bb96441d3dabea66592178",
+        "android_client_info": {
+          "package_name": "com.example.pujamandal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUx6XcnRbF3KIa6WPX_UHTFc6rM0AuU1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

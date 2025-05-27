@@ -1,0 +1,84 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner android:id="@+id/spinnerCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner android:id="@+id/spinnerPujaType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+        <RadioGroup
+            android:id="@+id/radioGroupOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/radioPanditOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Only Pandit"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioWithSamaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pandit + Samaan"
+                android:layout_marginStart="16dp"/>
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/textPujaPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price: ₹0"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <EditText android:id="@+id/editAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Address"
+            android:focusable="false"
+            android:layout_marginTop="8dp" />
+
+        <EditText android:id="@+id/editDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Date"
+            android:focusable="false"
+            android:layout_marginTop="8dp" />
+
+        <EditText android:id="@+id/editTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Time"
+            android:focusable="false"
+            android:layout_marginTop="8dp" />
+
+        <EditText android:id="@+id/editNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notes (optional)"
+            android:layout_marginTop="8dp" />
+
+        <Button android:id="@+id/btnBookNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Now"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
