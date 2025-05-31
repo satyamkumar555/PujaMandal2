@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_orderr"
+        android:title="Order" />
+    <item android:id="@+id/nav_chatt"
+        android:title="Chat" />
+    <item android:id="@+id/nav_dashboardd"
+        android:title="Dashboard" />
+    <item android:id="@+id/nav_profilee"
+        android:title="Profile" />
+    <item android:id="@+id/nav_logout"
+        android:title="Logout" />
+</menu>

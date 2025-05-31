@@ -37,7 +37,7 @@ public class DashboardFragment extends Fragment {
 
     private GoogleMap mMap;
     private TextInputEditText searchLocation;
-    private TextView locationText; // ✅ Map ke niche address dikhane ke liye
+    private TextView locationText; // Map ke niche address dikhane ke liye
     private FusedLocationProviderClient fusedLocationClient;
     private Marker currentMarker;
     private TextView statusTextView;  // TextView to show status
@@ -57,17 +57,17 @@ public class DashboardFragment extends Fragment {
         fetchOrderStatus(orderId);
 
 
-        // ✅ Initialize Google Places API
+        // Initialize Google Places API
         if (!Places.isInitialized()) {
             Places.initialize(requireContext(), getString(R.string.google_maps_key));
         }
 
-        // ✅ Reference UI Elements
+        // Reference UI Elements
         searchLocation = view.findViewById(R.id.searchLocation);
-        locationText = view.findViewById(R.id.locationText); // ✅ Address ke liye TextView
+        locationText = view.findViewById(R.id.locationText); // Address ke liye TextView
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
-        // ✅ Load Map
+        // Load Map
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_container);
         if (mapFragment == null) {
             mapFragment = new SupportMapFragment();
@@ -78,12 +78,12 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 mMap = googleMap;
-                getCurrentLocation(); // ✅ GPS se location fetch karega
+                getCurrentLocation(); // GPS se location fetch karega
                 mMap.setOnMapClickListener(latLng -> updateLocation(latLng));
             }
         });
 
-        // ✅ Search Button Click Event
+        // Search Button Click Event
         searchLocation.setOnEditorActionListener((v, actionId, event) -> {
             String location = searchLocation.getText().toString();
             if (!location.isEmpty()) {
@@ -97,7 +97,7 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-    // ✅ Fetch User's Current Location
+    // Fetch User's Current Location
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -112,7 +112,7 @@ public class DashboardFragment extends Fragment {
         });
     }
 
-    // ✅ Update Map, Search Bar & TextView
+    // Update Map, Search Bar & TextView
     private void updateLocation(LatLng latLng) {
         if (currentMarker != null) {
             currentMarker.remove();
@@ -120,7 +120,7 @@ public class DashboardFragment extends Fragment {
         currentMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Selected Location"));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-        // ✅ Address Fetch & Show in Search Bar & TextView
+        // Address Fetch & Show in Search Bar & TextView
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
@@ -129,7 +129,7 @@ public class DashboardFragment extends Fragment {
                 searchLocation.setText(addressText);
                 locationText.setText("Selected Location: " + addressText);
 
-                // ✅ Save address in SharedPreferences
+                // Save address in SharedPreferences
                 SharedPreferences prefs = requireContext().getSharedPreferences("location_prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("current_address", addressText);
@@ -141,7 +141,7 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    // ✅ Search Location Function
+    // Search Location Function
     private void searchPlace(String location) {
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         try {

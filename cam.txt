@@ -1,0 +1,5 @@
+cd C:\Users\st311\AndroidStudioProjects\PujaMandal2
+git add .
+git commit -m "Auto update on %date% %time%"
+git push
+pause
