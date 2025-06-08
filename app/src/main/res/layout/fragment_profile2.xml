@@ -1,13 +1,135 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pandit.ProfileFragment">
+    android:background="#FFF5F5">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-</FrameLayout>
+        <!-- Profile Image with Edit Button -->
+
+        <!-- Name -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            android:layout_marginBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="70dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/account_box"
+                    android:contentDescription="Profile Image"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Edit Button on Top Right -->
+            <ImageButton
+                android:id="@+id/editProfileBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/outline_edit_24"
+                android:backgroundTint="#D59191"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/panditName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pandit Ram Sharma"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/panditEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ramsharma@gmail.com"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Info Fields -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="4dp">
+
+            <TextView
+                android:id="@+id/phoneText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Phone: 9876543210"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/cityText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="City: Varanasi"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/expText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Experience: 10 Years"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/ratingText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="★"
+                android:textSize="16sp"
+                android:textColor="#333333"/>
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="About"
+                android:textSize="16sp"
+                android:textColor="#333333"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

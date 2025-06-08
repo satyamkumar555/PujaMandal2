@@ -20,9 +20,7 @@
             android:id="@+id/imagePandit"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_profile"
             android:scaleType="centerCrop"
-            android:background="@drawable/circle_bg"
             android:padding="2dp" />
 
         <!-- Details -->
