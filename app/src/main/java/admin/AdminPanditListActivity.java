@@ -43,13 +43,25 @@ public class AdminPanditListActivity extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     panditList.clear();
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        PanditModel pandit = document.toObject(PanditModel.class);
-                        if (pandit != null) {
-                            panditList.add(pandit);
-                        }
+                        PanditModel pandit = new PanditModel();
+                        pandit.setName(document.getString("name"));
+                        pandit.setCity(document.getString("city"));
+                        pandit.setExperience(document.getString("experience"));
+                        pandit.setPhone(document.getString("phone"));
+                        pandit.setImageUrl(document.getString("imageBase64"));
+
+                        Double rating = document.getDouble("avgRating");
+                        Long total = document.getLong("totalRatings");
+                        pandit.setAvgRating(rating != null ? rating : 0.0);
+                        pandit.setTotalRatings(total != null ? total : 0);
+
+                        pandit.setId(document.getId());  // ✅ Important
+
+                        panditList.add(pandit);
                     }
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> Log.e("AdminFirestoreError", "Error fetching pandits", e));
     }
+
 }

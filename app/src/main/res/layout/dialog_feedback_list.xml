@@ -1,0 +1,12 @@
+<!-- res/layout/dialog_feedback_list.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:padding="16dp"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:overScrollMode="always"
+        android:scrollbars="vertical"/>
+</LinearLayout>

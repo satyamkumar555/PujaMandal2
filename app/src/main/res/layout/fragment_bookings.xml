@@ -1,84 +1,173 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@drawable/gradient_background"
+    android:padding="12dp">
 
-    <LinearLayout android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Spinner android:id="@+id/spinnerCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Spinner android:id="@+id/spinnerPujaType"
+        <!-- Booking Form Card -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-        <RadioGroup
-            android:id="@+id/radioGroupOptions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_rounded"
+            android:padding="16dp"
+            android:elevation="5dp"
+            android:layout_marginBottom="20dp">
 
-            <RadioButton
-                android:id="@+id/radioPanditOnly"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Only Pandit"
-                android:checked="true"/>
+                android:text="🕉 Book a Puja"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="12dp" />
 
-            <RadioButton
-                android:id="@+id/radioWithSamaan"
+            <!-- City -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pandit + Samaan"
-                android:layout_marginStart="16dp"/>
-        </RadioGroup>
+                android:text="City"
+                android:textColor="#666"
+                android:textSize="14sp" />
 
+            <Spinner
+                android:id="@+id/spinnerCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
 
+            <!-- Puja Type -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puja Type"
+                android:textColor="#666"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPujaType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Options -->
+            <RadioGroup
+                android:id="@+id/radioGroupOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <RadioButton
+                    android:id="@+id/radioPanditOnly"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Pandit Only" />
+
+                <RadioButton
+                    android:id="@+id/radioWithSamaan"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="With Samaan" />
+            </RadioGroup>
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/textPujaPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: ₹0"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Address, Date, Time -->
+            <EditText
+                android:id="@+id/editAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="📍 Address"
+                android:background="@drawable/bg_edittext_rounded"
+                android:padding="10dp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/editDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="📅 Date"
+                    android:focusable="false"
+                    android:background="@drawable/bg_edittext_rounded"
+                    android:padding="10dp"
+                    android:layout_marginEnd="8dp" />
+
+                <EditText
+                    android:id="@+id/editTime"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="⏰ Time"
+                    android:focusable="false"
+                    android:background="@drawable/bg_edittext_rounded"
+                    android:padding="10dp" />
+            </LinearLayout>
+
+            <!-- Notes -->
+            <EditText
+                android:id="@+id/editNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="📝 Note (optional)"
+                android:background="@drawable/bg_edittext_rounded"
+                android:padding="10dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Book Button -->
+            <Button
+                android:id="@+id/btnBookNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ Book Now"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <!-- Booking List -->
         <TextView
-            android:id="@+id/textPujaPrice"
-            android:layout_width="match_parent"
+            android:id="@+id/textYourBookings"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price: ₹0"
-            android:layout_marginTop="4dp"
+            android:text="📋 Your Bookings"
+            android:textSize="17sp"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textColor="#2E2E2E"
+            android:layout_marginBottom="6dp"
+            android:visibility="gone" />
 
-        <EditText android:id="@+id/editAddress"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerUserBookings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select Address"
-            android:focusable="false"
-            android:layout_marginTop="8dp" />
-
-        <EditText android:id="@+id/editDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select Date"
-            android:focusable="false"
-            android:layout_marginTop="8dp" />
-
-        <EditText android:id="@+id/editTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select Time"
-            android:focusable="false"
-            android:layout_marginTop="8dp" />
-
-        <EditText android:id="@+id/editNote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Notes (optional)"
-            android:layout_marginTop="8dp" />
-
-        <Button android:id="@+id/btnBookNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Book Now"
-            android:layout_marginTop="16dp" />
-
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="20dp" />
     </LinearLayout>
 </ScrollView>

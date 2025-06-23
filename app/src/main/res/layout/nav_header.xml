@@ -15,8 +15,12 @@
         android:background="#D1D1D1">
 
         <ImageButton
+            android:id="@+id/profileImageHeader"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent" />
+
 
     </androidx.cardview.widget.CardView>
 

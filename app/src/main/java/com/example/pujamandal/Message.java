@@ -1,19 +1,17 @@
 package com.example.pujamandal;
 
 public class Message {
-    public String senderId;
-    public String receiverId;
-    public String message;
-    public long timestamp;
+    private String sender, receiver, message;
 
-    public Message() { }
+    public Message() {}
 
-    public Message(String senderId, String receiverId, String message, long timestamp) {
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+    public Message(String sender, String receiver, String message) {
+        this.sender = sender;
+        this.receiver = receiver;
         this.message = message;
-        this.timestamp = timestamp;
     }
+
+    public String getSender() { return sender; }
+    public String getReceiver() { return receiver; }
+    public String getMessage() { return message; }
 }
-
-

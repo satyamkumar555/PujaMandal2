@@ -3,12 +3,14 @@
         android:title="Home" />
     <item android:id="@+id/menu_bookings"
         android:title="My Bookings" />
-    <item android:id="@+id/menu_profile"
-        android:title="Profile" />
+    <item android:id="@+id/menu_chat"
+        android:title="Chat"/>
 
     <item
         android:id="@+id/menu_pandits"
         android:title="Pandits"/>
+    <item android:id="@+id/menu_profile"
+        android:title="Profile" />
 
     <item android:id="@+id/menu_login"
         android:title="Login" />

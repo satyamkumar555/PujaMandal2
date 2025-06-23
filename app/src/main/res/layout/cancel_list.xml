@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- User Info -->
+        <TextView
+            android:id="@+id/textUserName"
+            android:text="User: Rajesh Kumar"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textUserPhone"
+            android:text="Phone: 9876543210"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Puja Info -->
+        <TextView
+            android:id="@+id/textPujaType"
+            android:text="Puja: Satyanarayan Katha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/textPrice"
+            android:text="Price: ₹0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/textDateTime"
+            android:text="Date: 24/06/2025   Time: 10:00 AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Cancel Reason -->
+        <TextView
+            android:id="@+id/textCancelReason"
+            android:text="Reason: Family emergency"
+            android:textColor="#B00020"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textStyle="italic" />
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/textStatus"
+            android:text="Status: Cancel Requested"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnApproveCancel"
+                android:text="Approve Cancel"
+                android:layout_weight="1"
+                android:backgroundTint="#4CAF50"
+                android:textColor="@android:color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btnRejectCancel"
+                android:text="Reject Cancel"
+                android:layout_weight="1"
+                android:backgroundTint="#F44336"
+                android:textColor="@android:color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

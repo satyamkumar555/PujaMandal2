@@ -1,10 +1,14 @@
 package com.example.pujamandal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class Main_Page extends AppCompatActivity {
 
@@ -98,7 +103,9 @@ public class Main_Page extends AppCompatActivity {
                 selectedFragment = new BookingsFragment();
             } else if (itemId == R.id.menu_profile) {
                 selectedFragment = new ProfileFragment();
-            } else if (itemId == R.id.menu_pandits) {
+            } else if (itemId ==R.id.menu_chat) {
+                selectedFragment = new ChatFragment();
+        } else if (itemId == R.id.menu_pandits) {
                 selectedFragment = new PanditListFragment();
             } else if (itemId == R.id.menu_login) {
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
@@ -132,41 +139,46 @@ public class Main_Page extends AppCompatActivity {
 
     // Update the navigation drawer header with user details
     private void updateHeader() {
-        // Get the header layout view
         View headerView = navigationView.getHeaderView(0);
-        TextView userNameTextView = headerView.findViewById(R.id.UserName); // Username TextView
-        TextView emailTextView = headerView.findViewById(R.id.gmail); // Email TextView
+        TextView userNameTextView = headerView.findViewById(R.id.UserName);
+        TextView emailTextView = headerView.findViewById(R.id.gmail);
+        ImageButton profileImageView = headerView.findViewById(R.id.profileImageHeader); // ✅ ImageButton ref
 
-        FirebaseUser user = mAuth.getCurrentUser(); // Get the current Firebase user
+        FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            // Display email in the header
-            String email = user.getEmail();
-            emailTextView.setText(email != null ? email : "Email not available");
+            emailTextView.setText(user.getEmail());
 
-            // Fetch user data from Firestore using UID
             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-            firebaseFirestore.collection("users") // Replace "Users" with your Firestore collection name
+            firebaseFirestore.collection("users")
                     .document(user.getUid())
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            String name = documentSnapshot.getString("name"); // Fetch 'Name' field from Firestore
-                            if (name != null && !name.isEmpty()) {
-                                userNameTextView.setText(name); // Set fetched name
+                            String name = documentSnapshot.getString("name");
+                            userNameTextView.setText(name != null && !name.isEmpty() ? name : "User");
+
+                            // ✅ Load image if exists
+                            String imageBase64 = documentSnapshot.getString("imageBase64");
+                            if (imageBase64 != null && !imageBase64.isEmpty()) {
+                                byte[] decodedBytes = Base64.decode(imageBase64, Base64.DEFAULT);
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                                profileImageView.setImageBitmap(bitmap);
                             } else {
-                                userNameTextView.setText("User"); // Fallback name
+                                profileImageView.setImageResource(R.drawable.account_box); // default
                             }
                         } else {
-                            userNameTextView.setText("User"); // Document does not exist
+                            userNameTextView.setText("User");
+                            profileImageView.setImageResource(R.drawable.account_box);
                         }
                     })
                     .addOnFailureListener(e -> {
-                        userNameTextView.setText("User"); // Fallback name on error
+                        userNameTextView.setText("User");
+                        profileImageView.setImageResource(R.drawable.account_box);
                     });
         } else {
-            // Default text if no user is logged in
             userNameTextView.setText("UserName");
             emailTextView.setText("guest@example.com");
         }
     }
+
 }

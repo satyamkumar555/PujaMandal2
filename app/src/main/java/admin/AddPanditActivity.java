@@ -152,7 +152,7 @@ public class AddPanditActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         String panditUid = task.getResult().getUser().getUid();
-                        // ✅ Sign out the newly created Pandit user
+
                         auth.signOut();
 
                         // ✅ Sign back in as admin

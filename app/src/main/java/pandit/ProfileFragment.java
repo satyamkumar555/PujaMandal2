@@ -31,8 +31,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pujamandal.FeedbackAdapter;
+
 
 public class ProfileFragment extends Fragment {
 
@@ -44,6 +52,10 @@ public class ProfileFragment extends Fragment {
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private RecyclerView feedbackRecyclerView;
+    private FeedbackAdapter feedbackAdapter;
+    private List<String> feedbackList;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -64,6 +76,12 @@ public class ProfileFragment extends Fragment {
         aboutTV = view.findViewById(R.id.aboutText);
         editBtn = view.findViewById(R.id.editProfileBtn);
         profileImage = view.findViewById(R.id.profileImage);
+        feedbackRecyclerView = view.findViewById(R.id.feedbackRecycler);
+        feedbackList = new ArrayList<>();
+        feedbackAdapter = new FeedbackAdapter(feedbackList);
+        feedbackRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        feedbackRecyclerView.setAdapter(feedbackAdapter);
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -158,7 +176,15 @@ public class ProfileFragment extends Fragment {
                         phoneTV.setText("Phone: " + documentSnapshot.getString("phone"));
                         cityTV.setText("City: " + documentSnapshot.getString("city"));
                         expTV.setText("Experience: " + documentSnapshot.getString("experience"));
-                        ratingTV.setText(documentSnapshot.getString("rating") + " ★");
+                        Double avg = documentSnapshot.getDouble("avgRating");
+                        Long count = documentSnapshot.getLong("totalRatings");
+
+                        if (avg != null && count != null) {
+                            ratingTV.setText(String.format(Locale.getDefault(), "%.1f ★ (%d ratings)", avg, count));
+                        } else {
+                            ratingTV.setText("No ratings yet");
+                        }
+
                         aboutTV.setText(documentSnapshot.getString("description"));
 
                         String base64 = documentSnapshot.getString("imageBase64");
@@ -173,6 +199,19 @@ public class ProfileFragment extends Fragment {
                     } else {
                         Toast.makeText(getActivity(), "Profile not found", Toast.LENGTH_SHORT).show();
                     }
+                    // 👇 Load feedback
+                    List<Map<String, Object>> ratings = (List<Map<String, Object>>) documentSnapshot.get("rating");
+                    feedbackList.clear();
+                    if (ratings != null) {
+                        for (Map<String, Object> rating : ratings) {
+                            String fb = (String) rating.get("feedback");
+                            if (fb != null && !fb.trim().isEmpty()) {
+                                feedbackList.add(fb);
+                            }
+                        }
+                        feedbackAdapter.notifyDataSetChanged();
+                    }
+
                 })
                 .addOnFailureListener(e -> Toast.makeText(getActivity(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }

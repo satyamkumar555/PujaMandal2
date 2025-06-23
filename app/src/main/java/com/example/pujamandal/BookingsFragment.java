@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.*;
@@ -20,25 +22,34 @@ public class BookingsFragment extends Fragment {
 
     private Spinner spinnerCity, spinnerPujaType;
     private EditText editDate, editTime, editNote, editAddress;
-    private TextView textPujaPrice;
+    private TextView textPujaPrice, textYourBookings;
     private Button btnBookNow;
+    private RecyclerView recyclerUserBookings;
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+
     private RadioGroup radioGroupOptions;
     private RadioButton radioPanditOnly, radioWithSamaan;
+
     private Map<String, Long> pricePanditOnlyMap = new HashMap<>();
     private Map<String, Long> priceWithSamaanMap = new HashMap<>();
+    private List<DocumentSnapshot> userBookings = new ArrayList<>();
+    private UserBookingAdapter userBookingAdapter;
 
-
-    private Map<String, Long> pujaPrices = new HashMap<>();
-
-    public BookingsFragment() { }
+    public BookingsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookings, container, false);
 
+        // Initialize Firebase instances
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+
+
+        // Bind views
         spinnerCity = view.findViewById(R.id.spinnerCity);
         spinnerPujaType = view.findViewById(R.id.spinnerPujaType);
         editDate = view.findViewById(R.id.editDate);
@@ -50,26 +61,21 @@ public class BookingsFragment extends Fragment {
         radioGroupOptions = view.findViewById(R.id.radioGroupOptions);
         radioPanditOnly = view.findViewById(R.id.radioPanditOnly);
         radioWithSamaan = view.findViewById(R.id.radioWithSamaan);
+        textYourBookings = view.findViewById(R.id.textYourBookings);
+        recyclerUserBookings = view.findViewById(R.id.recyclerUserBookings);
 
-
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-
-        EditText editAddress = view.findViewById(R.id.editAddress);
-
+        // Pre-fill address if available
         SharedPreferences prefs = requireContext().getSharedPreferences("location_prefs", Context.MODE_PRIVATE);
         String savedAddress = prefs.getString("current_address", "");
-
         if (!savedAddress.isEmpty()) {
             editAddress.setText(savedAddress);
         }
 
-
-
-
+        // Load data into spinners
         loadCities();
         loadPujaTypes();
 
+        // Date Picker
         editDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             DatePickerDialog datePicker = new DatePickerDialog(getContext(),
@@ -78,34 +84,36 @@ public class BookingsFragment extends Fragment {
             datePicker.show();
         });
 
+        // Time Picker
         editTime.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             TimePickerDialog timePicker = new TimePickerDialog(getContext(),
-                    (view12, hourOfDay, minute) -> editTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)),
+                    (view12, hourOfDay, minute) ->
+                            editTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)),
                     calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
             timePicker.show();
         });
 
-        editAddress.setOnClickListener(v -> {
-            // TODO: Implement map picker here
-            Toast.makeText(getContext(), "Map Picker not implemented yet", Toast.LENGTH_SHORT).show();
-        });
-
-
+        // Spinner selection
         spinnerPujaType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
             public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
                 updatePrice();
             }
-
-            @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         radioGroupOptions.setOnCheckedChangeListener((group, checkedId) -> updatePrice());
 
-
+        // Booking Button
         btnBookNow.setOnClickListener(v -> bookPuja());
+
+        // Booking List setup
+        recyclerUserBookings.setLayoutManager(new LinearLayoutManager(getContext()));
+        userBookingAdapter = new UserBookingAdapter(getContext(), userBookings);
+        recyclerUserBookings.setAdapter(userBookingAdapter);
+
+        // Load existing bookings
+        loadUserBookings();
 
         return view;
     }
@@ -139,7 +147,6 @@ public class BookingsFragment extends Fragment {
             spinnerPujaType.setAdapter(adapter);
         });
     }
-
 
     private void bookPuja() {
         String city = spinnerCity.getSelectedItem().toString();
@@ -180,6 +187,9 @@ public class BookingsFragment extends Fragment {
                         Toast.makeText(getContext(), "Booking placed!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        // Reload updated bookings
+        loadUserBookings();
     }
 
     private void updatePrice() {
@@ -193,5 +203,26 @@ public class BookingsFragment extends Fragment {
         textPujaPrice.setText("Price: ₹" + (price != null ? price : 0));
     }
 
+    private void loadUserBookings() {
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("Bookings")
+                .whereEqualTo("userId", userId)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .get()  // 🔁 SnapshotListener hata ke get() use karenge
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    userBookings.clear();
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
+                        if (doc.exists()) {  // ✅ Only existing bookings
+                            userBookings.add(doc);
+                        }
+                    }
+
+                    userBookingAdapter.notifyDataSetChanged();
+                    textYourBookings.setVisibility(userBookings.isEmpty() ? View.GONE : View.VISIBLE);
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
 
 }

@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private Button btnLogout, panditList,userList,managePandits, Addpujas;
+    private Button btnLogout, panditList,userList,managePandits, Addpujas, viewCancelRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         panditList = findViewById(R.id.viewPanditList);
         managePandits=findViewById(R.id.managePandits);
         Addpujas = findViewById(R.id.AddPuja);
+        viewCancelRequests = findViewById(id.viewCancelRequests);
 
         panditList.setOnClickListener(v -> {
             Intent intent = new Intent(AdminActivity.this, AdminPanditListActivity.class);
@@ -61,6 +62,13 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AddPujaActivity.class);
+                startActivity(intent);
+            }
+        });
+        viewCancelRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, ItemAdminCancelRequestActivity.class);
                 startActivity(intent);
             }
         });

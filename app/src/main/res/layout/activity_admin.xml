@@ -30,11 +30,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manage Pandits"/>
+
     <Button
         android:id="@+id/AddPuja"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Puja"/>
+
+    <!-- 🆕 New Button for Cancel Requests -->
+    <Button
+        android:id="@+id/viewCancelRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Cancel Requests" />
 
     <Button
         android:id="@+id/admin_logout"
@@ -42,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Logout"/>
 
-    <!-- ✅ Ye FrameLayout Fragment show karega -->
+    <!-- ✅ Fragment will load here -->
     <FrameLayout
         android:id="@+id/admin_fragment_container"
         android:layout_width="match_parent"

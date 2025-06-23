@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Booking"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Puja Type -->
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puja Type"
+            android:textColor="#444"/>
+        <Spinner
+            android:id="@+id/spinnerDialogPujaType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Option -->
+        <RadioGroup
+            android:id="@+id/radioGroupDialogOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <RadioButton
+                android:id="@+id/radioDialogPanditOnly"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Pandit Only" />
+
+            <RadioButton
+                android:id="@+id/radioDialogWithSamaan"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="With Samaan" />
+        </RadioGroup>
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/textDialogPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: ₹0"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Date -->
+        <EditText
+            android:id="@+id/editDialogDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="📅 Date"
+            android:focusable="false"
+            android:background="@drawable/bg_edittext_rounded"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Time -->
+        <EditText
+            android:id="@+id/editDialogTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="⏰ Time"
+            android:focusable="false"
+            android:background="@drawable/bg_edittext_rounded"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Address -->
+        <EditText
+            android:id="@+id/editDialogAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="📍 Address"
+            android:background="@drawable/bg_edittext_rounded"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Note -->
+        <EditText
+            android:id="@+id/editDialogNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="📝 Note (optional)"
+            android:background="@drawable/bg_edittext_rounded"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Submit -->
+        <Button
+            android:id="@+id/btnSubmitUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Update"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:padding="10dp" />
+
+    </LinearLayout>
+</ScrollView>

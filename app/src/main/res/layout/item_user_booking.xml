@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textPujaType"
+        android:text="Puja Type"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textDateTime"
+        android:text="Date &amp; Time" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textPrice"
+        android:text="Price" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textAddress"
+        android:text="Address"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtCancelRejectReason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel Rejected Reason: "
+        android:textColor="@android:color/holo_orange_dark"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textStatus"
+        android:text="Status"
+        android:textStyle="italic"/>
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp">
+        <Button
+            android:id="@+id/btnMarkComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark as Complete"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"/>
+
+
+        <Button
+            android:id="@+id/btnRequestUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📝 Update"
+            android:textSize="13sp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:padding="6dp"/>
+
+        <Button
+            android:id="@+id/btnRequestCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="❌ Cancel"
+            android:textSize="13sp"
+            android:backgroundTint="#D32F2F"
+            android:textColor="@android:color/white"
+            android:padding="6dp"/>
+    </LinearLayout>
+
+</LinearLayout>
